@@ -85,7 +85,9 @@ const upgrade = connection => {
           result.push(`${key} = ${value.toString()}`);
         } else if (typeof value === 'string') {
           result.push(buildCondition(key, value, s => this.escape(s)));
-        }
+        } else if (value === null) {
+		      result.push(`${key} IS NULL`);
+		    }
       }
       return result.join(' AND ');
     };
